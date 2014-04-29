@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 if [ $# -ne 2 ]; then
@@ -11,7 +11,14 @@ output="$2"
 tmpdir=/tmp/$(basename $0).$$
 mkdir -p $tmpdir
 
-# TODO assumes a single Track. Should at least validate.
+# Validate that there's exactly one Track element
+trackcount=$(xml sel -t -v "count(//*[local-name()='Track'])" "$input")
+if [ $trackcount -ne 1 ]; then
+    echo "ERROR: expected exactly one Track element; found $trackcount"
+    exit -2
+fi
+
+# Extract the data we care about into a set of files
 xml sel -t -m "//*[local-name()='Track']/*[local-name()='when']/text()" -c . -n "$1" > $tmpdir/when
 xml sel -t -m "//*[local-name()='Track']/gx:coord/text()" -c . -n "$1" > $tmpdir/coord
 prefix="//*[local-name()='Track']/*[local-name()='ExtendedData']/*[local-name()='SchemaData']/gx:SimpleArrayData[@name='"
