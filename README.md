@@ -5,7 +5,7 @@ power data in it's GPX export; Strava doesn't import KML files.
 
 Usage
 =====
-./kml2gpx <input> <output>
+./kml2gpx &lt;input&gt; &lt;output&gt;
 
 Dependencies
 ============
