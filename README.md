@@ -9,8 +9,8 @@ Usage
 
 Dependencies
 ============
-xmllint (`brew install xmllib2`)
-xmlstarlet (`brew install xmlstarlet`)
+- xmllint (`brew install xmllib2`)
+- xmlstarlet (`brew install xmlstarlet`)
 
 Limitations
 ===========
