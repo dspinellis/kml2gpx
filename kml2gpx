@@ -23,10 +23,12 @@ xmlstarlet sel -t -m "//*[local-name()='Track']/*[local-name()='when']/text()" -
 xmlstarlet sel -t -m "//*[local-name()='Track']/gx:coord/text()" -c . -n "$1" > $tmpdir/coord
 prefix="//*[local-name()='Track']/*[local-name()='ExtendedData']/*[local-name()='SchemaData']/gx:SimpleArrayData[@name='"
 suffix="']/gx:value/text()"
+set +e
 xmlstarlet sel -t -m "${prefix}Heartrate${suffix}" -c . -n "$1" > $tmpdir/hr
 xmlstarlet sel -t -m "${prefix}Cadence${suffix}" -c . -n "$1" > $tmpdir/cadence
 xmlstarlet sel -t -m "${prefix}Distance${suffix}" -c . -n "$1" > $tmpdir/distance
 xmlstarlet sel -t -m "${prefix}Power${suffix}" -c . -n "$1" > $tmpdir/power
+set -e
 
 echo '<?xml version="1.0" encoding="utf-8"?>
 <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.cluetrust.com/XML/GPXDATA/1/0 http://www.cluetrust.com/Schemas/gpxdata10.xsd" xmlns:gpxdata="http://www.cluetrust.com/XML/GPXDATA/1/0" version="1.1" creator="Movescount - http://www.movescount.com" xmlns="http://www.topografix.com/GPX/1/1">
