@@ -2,8 +2,8 @@
 set -e
 
 if [ $# -ne 2 ]; then
-    echo "Usage: $0 <input> <output>"
-    exit -1
+    echo "Usage: $0 <input> <output>" 1>&2
+    exit 1
 fi
 
 input="$1"
@@ -14,8 +14,8 @@ mkdir -p $tmpdir
 # Validate that there's exactly one Track element
 trackcount=$(xmlstarlet sel -t -v "count(//*[local-name()='Track'])" "$input")
 if [ $trackcount -ne 1 ]; then
-    echo "ERROR: expected exactly one Track element; found $trackcount"
-    exit -2
+    echo "ERROR: expected exactly one Track element; found $trackcount" 1>&2
+    exit 2
 fi
 
 # Extract the data we care about into a set of files
